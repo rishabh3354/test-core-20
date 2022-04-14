@@ -47,6 +47,7 @@ parts:
       - cryptography
       - psutil
       - python-slugify
+      - yt-dlp
     build-attributes: [ keep-execstack ]
 
   deps:
