@@ -17,53 +17,59 @@ slots:
       - /
 
 parts:
-  python-ppa:
-    plugin: nil
-    override-pull: |
-      snapcraftctl pull
-      apt install software-properties-common -y
-      add-apt-repository ppa:deadsnakes/ppa -y
-      apt update
+  platform:
+     plugin: nil
+     stage-packages:
+       - adwaita-icon-theme
+       - dmz-cursor-theme
+       - gnome-themes-standard
+       - gsettings-desktop-schemas
+       - libdb5.3
+       - libgdk-pixbuf2.0-0
+       - libglib2.0-0
+       - libglu1-mesa
+       - libslang2
+       - libxkbcommon0
+       - light-themes
+       - locales-all
+       - python3-pyqt5
+       - qt5-gtk-platformtheme
+       - shared-mime-info
+       - ttf-ubuntu-font-family
+       - xdg-user-dirs
+       - samba-libs
 
   deps:
-    plugin: nil
-    after: [ python-ppa ]
-    stage-packages:
-      - mpv # this is ppa version of mpv
-      - ffmpeg # used by y2mate for merging audio video
-      - adwaita-icon-theme
-      - dmz-cursor-theme
-      - gnome-themes-standard
-      - gsettings-desktop-schemas
-      - libdb5.3
-      - libgdk-pixbuf2.0-0
-      - libglib2.0-0
-      - libglu1-mesa
-      - libslang2
-      - libxkbcommon0
-      - light-themes
-      - locales-all
-      - python3-pyqt5
-      - qt5-gtk-platformtheme
-      - shared-mime-info
-      - ttf-ubuntu-font-family
-      - xdg-user-dirs
-      - samba-libs
-      - build-essential
-      - libssl-dev
-      - libffi-dev
-      - python3.8-dev
-
+     plugin: nil
+     stage-packages:
+           - mpv
+           - ffmpeg
 
   glances-pro:
     plugin: python
-    source: .
     python-packages:
+      - setuptools
+      - wheel
       - requests
       - cryptography
       - psutil
       - python-slugify
       - yt-dlp
     build-packages:
-      - python3.8-dev
+      - gcc
+      - python3-dev
+      - python3-systemd
+    stage-packages:
+      - python3-systemd
+    source: .
+
     build-attributes: [ keep-execstack ]
+
+  cleanup:
+     after:
+       - platform
+     plugin: nil
+     override-prime: |
+       # Remove unneeded stage files to save space
+       cd usr/share
+       rm -rf apport bash-completion bug doc doc-base lintian man pam-configs pkgconfig upstart zsh
