@@ -30,33 +30,30 @@ parts:
     stage-packages:
       - mpv # this is ppa version of mpv
       - ffmpeg # used by y2mate for merging audio video
+      - adwaita-icon-theme
+      - dmz-cursor-theme
+      - gnome-themes-standard
+      - gsettings-desktop-schemas
+      - libdb5.3
+      - libgdk-pixbuf2.0-0
+      - libglib2.0-0
+      - libglu1-mesa
+      - libslang2
+      - libxkbcommon0
+      - light-themes
+      - locales-all
+      - python3-pyqt5
+      - qt5-gtk-platformtheme
+      - shared-mime-info
+      - ttf-ubuntu-font-family
+      - xdg-user-dirs
+      - samba-libs
+      - build-essential
+      - libssl-dev
+      - libffi-dev
+      - python3.8
+      - python3-dev
 
-  platform:
-     plugin: nil
-     stage-packages:
-       - adwaita-icon-theme
-       - dmz-cursor-theme
-       - gnome-themes-standard
-       - gsettings-desktop-schemas
-       - libdb5.3
-       - libgdk-pixbuf2.0-0
-       - libglib2.0-0
-       - libglu1-mesa
-       - libslang2
-       - libxkbcommon0
-       - light-themes
-       - locales-all
-       - python3-pyqt5
-       - qt5-gtk-platformtheme
-       - shared-mime-info
-       - ttf-ubuntu-font-family
-       - xdg-user-dirs
-       - samba-libs
-       - build-essential
-       - libssl-dev
-       - libffi-dev
-       - python3.8
-       - python3-dev
 
   glances-pro:
     plugin: python
@@ -68,12 +65,3 @@ parts:
       - python-slugify
       - yt-dlp
     build-attributes: [ keep-execstack ]
-
-  cleanup:
-     after:
-       - platform
-     plugin: nil
-     override-prime: |
-       # Remove unneeded stage files to save space
-       cd usr/share
-       rm -rf apport bash-completion bug doc doc-base lintian man pam-configs pkgconfig upstart zsh
