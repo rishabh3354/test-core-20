@@ -21,7 +21,7 @@ parts:
     plugin: nil
     override-pull: |
       snapcraftctl pull
-      apt install software-properties-common
+      apt install software-properties-common -y
       add-apt-repository ppa:deadsnakes/ppa -y
       apt update
 
