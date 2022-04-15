@@ -38,7 +38,10 @@ parts:
        - ttf-ubuntu-font-family
        - xdg-user-dirs
        - samba-libs
-       - python3-distutils
+       - build-essential
+       - libssl-dev
+       - libffi-dev
+       - python-dev
 
   glances-pro:
     plugin: python
