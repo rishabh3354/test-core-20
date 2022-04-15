@@ -17,31 +17,46 @@ slots:
       - /
 
 parts:
+  python-ppa:
+    plugin: nil
+    override-pull: |
+      snapcraftctl pull
+      add-apt-repository ppa:deadsnakes/ppa -y
+      apt update
+
+  deps:
+    plugin: nil
+    after: [ python-ppa ]
+    stage-packages:
+      - mpv # this is ppa version of mpv
+      - ffmpeg # used by y2mate for merging audio video
+
   platform:
      plugin: nil
      stage-packages:
        - adwaita-icon-theme
-       - dmz-cursor-theme
-       - gnome-themes-standard
-       - gsettings-desktop-schemas
-       - libdb5.3
-       - libgdk-pixbuf2.0-0
-       - libglib2.0-0
-       - libglu1-mesa
-       - libslang2
-       - libxkbcommon0
-       - light-themes
-       - locales-all
-       - python3-pyqt5
-       - qt5-gtk-platformtheme
-       - shared-mime-info
-       - ttf-ubuntu-font-family
-       - xdg-user-dirs
-       - samba-libs
-       - build-essential
-       - libssl-dev
-       - libffi-dev
-       - python3-dev
+         - dmz-cursor-theme
+         - gnome-themes-standard
+         - gsettings-desktop-schemas
+         - libdb5.3
+         - libgdk-pixbuf2.0-0
+         - libglib2.0-0
+         - libglu1-mesa
+         - libslang2
+         - libxkbcommon0
+         - light-themes
+         - locales-all
+         - python3-pyqt5
+         - qt5-gtk-platformtheme
+         - shared-mime-info
+         - ttf-ubuntu-font-family
+         - xdg-user-dirs
+         - samba-libs
+         - build-essential
+         - libssl-dev
+         - libffi-dev
+         - python3
+         - python3-dev
 
   glances-pro:
     plugin: python
@@ -53,12 +68,6 @@ parts:
       - python-slugify
       - yt-dlp
     build-attributes: [ keep-execstack ]
-
-  deps:
-     plugin: nil
-     stage-packages:
-           - mpv
-           - ffmpeg
 
   cleanup:
      after:
