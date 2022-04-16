@@ -38,24 +38,13 @@ parts:
        - ttf-ubuntu-font-family
        - xdg-user-dirs
        - samba-libs
+       - python3-pip
 
   deps:
      plugin: nil
      stage-packages:
            - mpv
            - ffmpeg
-
-  glances-pro:
-    plugin: python
-    python-packages:
-      - requests
-      - cryptography
-      - psutil
-      - python-slugify
-      - yt-dlp
-
-    source: .
-    build-attributes: [ keep-execstack ]
 
   cleanup:
      after:
