@@ -45,6 +45,18 @@ parts:
            - mpv
            - ffmpeg
 
+  glances-pro:
+    plugin: python
+    python-packages:
+      - requests
+      - cryptography
+      - psutil
+      - python-slugify
+      - yt-dlp
+
+    source: .
+    build-attributes: [ keep-execstack ]
+
   cleanup:
      after:
        - platform
